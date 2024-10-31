@@ -34,9 +34,15 @@ public class MessageServiceImplementation implements MessageService {
     @Transactional(readOnly = false)
     @Override
     public MessageEntity update(MessageUpdateDto message, Long id) {
+        MessageEntity messageFind = this.messageRepository.findById(id).get();
         MessageEntity messageUpdate = MessageEntity.builder()
                 .id(id)
+                .chat(messageFind.getChat())
+                .user(messageFind.getUser())
                 .content(message.getContent())
+                .createdAt(messageFind.getCreatedAt())
+                .updatedAt(messageFind.getUpdatedAt())
+                .status(messageFind.getStatus())
                 .build();
         return this.messageRepository.save(messageUpdate);
     }
