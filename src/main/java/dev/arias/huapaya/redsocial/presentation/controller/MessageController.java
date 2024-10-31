@@ -25,7 +25,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping(path = "message")
 @RestController
 public class MessageController {
-    
+
     private final MessageService messageService;
 
     @PostMapping
@@ -50,6 +50,12 @@ public class MessageController {
     public ResponseEntity<?> findAll() {
         List<MessageAllDto> messageAll = this.messageService.findAll();
         return new ResponseEntity<>(messageAll, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "chat/{chatId}")
+    public ResponseEntity<?> findByChatId(@PathVariable Long chatId) {
+        List<MessageEntity> findByChatId = this.messageService.findByChatId(chatId);
+        return new ResponseEntity<>(findByChatId, HttpStatus.OK);
     }
 
 }

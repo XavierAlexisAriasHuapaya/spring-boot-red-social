@@ -68,4 +68,10 @@ public class MessageServiceImplementation implements MessageService {
         return messageAllDto;
     }
 
+    @Override
+    public List<MessageEntity> findByChatId(Long chatId) {
+        List<MessageEntity> findByChatId = this.messageRepository.findByChatId(chatId);
+        return findByChatId;
+    }
+
 }

@@ -15,4 +15,6 @@ public interface MessageService {
 
     public List<MessageAllDto> findAll();
 
+    public List<MessageEntity> findByChatId(Long chatId);
+
 }
