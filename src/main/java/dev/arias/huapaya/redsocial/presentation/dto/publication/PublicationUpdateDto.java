@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class PublicationUpdateDto {
     
+    private Long id;
+
     private String content;
     
 }

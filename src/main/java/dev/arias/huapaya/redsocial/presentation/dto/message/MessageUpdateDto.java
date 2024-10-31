@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class MessageUpdateDto {
 
+    private Long id;
+
     private String content;
 
 }

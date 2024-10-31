@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 
 import dev.arias.huapaya.redsocial.persistence.entity.enums.ChatTypeEnum;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class ChatAllDto {
 
     private Long id;

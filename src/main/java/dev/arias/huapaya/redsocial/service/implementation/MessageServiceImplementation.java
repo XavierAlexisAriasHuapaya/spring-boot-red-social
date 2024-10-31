@@ -1,0 +1,65 @@
+package dev.arias.huapaya.redsocial.service.implementation;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import dev.arias.huapaya.redsocial.persistence.entity.MessageEntity;
+import dev.arias.huapaya.redsocial.persistence.repository.MessageRepository;
+import dev.arias.huapaya.redsocial.presentation.dto.message.MessageAllDto;
+import dev.arias.huapaya.redsocial.presentation.dto.message.MessageCreateDto;
+import dev.arias.huapaya.redsocial.presentation.dto.message.MessageUpdateDto;
+import dev.arias.huapaya.redsocial.service.interfaces.MessageService;
+import lombok.AllArgsConstructor;
+
+@AllArgsConstructor
+@Service
+public class MessageServiceImplementation implements MessageService {
+
+    private final MessageRepository messageRepository;
+
+    @Transactional(readOnly = false)
+    @Override
+    public MessageEntity create(MessageCreateDto message) {
+        MessageEntity messageCreate = MessageEntity.builder()
+                .chat(message.getChat())
+                .user(message.getUser())
+                .content(message.getContent())
+                .build();
+        return this.messageRepository.save(messageCreate);
+    }
+
+    @Transactional(readOnly = false)
+    @Override
+    public MessageEntity update(MessageUpdateDto message, Long id) {
+        MessageEntity messageUpdate = MessageEntity.builder()
+                .id(id)
+                .content(message.getContent())
+                .build();
+        return this.messageRepository.save(messageUpdate);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<MessageAllDto> findAll() {
+        List<MessageEntity> findAll = this.messageRepository.findAll();
+        return findAll.stream()
+                .map(this::convertAll)
+                .collect(Collectors.toList());
+    }
+
+    private MessageAllDto convertAll(MessageEntity message) {
+        MessageAllDto messageAllDto = MessageAllDto.builder()
+                .id(message.getId())
+                .chat(message.getChat())
+                .user(message.getUser())
+                .content(message.getContent())
+                .createdAt(message.getCreatedAt())
+                .updatedAt(message.getUpdatedAt())
+                .build();
+        return messageAllDto;
+    }
+
+}

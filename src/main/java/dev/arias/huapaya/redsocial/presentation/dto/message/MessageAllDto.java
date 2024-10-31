@@ -6,12 +6,14 @@ import dev.arias.huapaya.redsocial.persistence.entity.ChatEntity;
 import dev.arias.huapaya.redsocial.persistence.entity.UserEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class MessageAllDto {
 
     private Long id;

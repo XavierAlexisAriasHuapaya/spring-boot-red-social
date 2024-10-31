@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserUpdateDto {
 
+    private Long id;
+
     private String password;
 
 }
