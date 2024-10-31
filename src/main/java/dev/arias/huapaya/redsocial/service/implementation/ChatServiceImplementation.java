@@ -33,9 +33,14 @@ public class ChatServiceImplementation implements ChatService {
     @Transactional(readOnly = false)
     @Override
     public ChatEntity update(ChatUpdateDto chat, Long id) {
+        ChatEntity chatFind = this.chatRepository.findById(id).get();
         ChatEntity chatUpdate = ChatEntity.builder()
                 .id(id)
                 .name(chat.getName())
+                .chatType(chatFind.getChatType())
+                .createdAt(chatFind.getCreatedAt())
+                .updatedAt(chatFind.getUpdatedAt())
+                .status(chatFind.getStatus())
                 .build();
         return this.chatRepository.save(chatUpdate);
     }
