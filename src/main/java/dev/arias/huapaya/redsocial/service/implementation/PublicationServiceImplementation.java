@@ -33,9 +33,14 @@ public class PublicationServiceImplementation implements PublicationService {
     @Transactional(readOnly = false)
     @Override
     public PublicationEntity update(PublicationUpdateDto publication, Long id) {
+        PublicationEntity publicationFind = this.publicationRepository.findById(id).get();
         PublicationEntity publicationUpdate = PublicationEntity.builder()
                 .id(id)
+                .user(publicationFind.getUser())
                 .content(publication.getContent())
+                .createdAt(publicationFind.getCreatedAt())
+                .updatedAt(publicationFind.getUpdatedAt())
+                .status(publicationFind.getStatus())
                 .build();
         return this.publicationRepository.save(publicationUpdate);
 
