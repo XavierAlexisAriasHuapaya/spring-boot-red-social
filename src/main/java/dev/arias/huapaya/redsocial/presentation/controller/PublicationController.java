@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +37,7 @@ public class PublicationController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PostMapping(path = "{id}")
+    @PutMapping(path = "{id}")
     public ResponseEntity<?> update(@RequestBody PublicationUpdateDto publication, @PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
         PublicationEntity publicationUpdate = this.publicationService.update(publication, id);
