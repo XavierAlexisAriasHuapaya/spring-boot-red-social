@@ -2,10 +2,9 @@ spring:
   application:
     name: app-red-social
   datasource:
-    url: jdbc:mysql://localhost:3434/redsocial
-    username: usrredsocial
-    password: KK2RsMdLiJbwDds644r3
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/redsocial
+    username: postgres
+    password: 123
   jpa:
     hibernate:
       ddl-auto: create-drop
