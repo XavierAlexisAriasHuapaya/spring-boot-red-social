@@ -34,7 +34,7 @@ public class ChatServiceImplementation implements ChatService {
     @Override
     public ChatEntity update(ChatUpdateDto chat, Long id) {
         ChatEntity chatUpdate = ChatEntity.builder()
-                .id(chat.getId())
+                .id(id)
                 .name(chat.getName())
                 .build();
         return this.chatRepository.save(chatUpdate);
