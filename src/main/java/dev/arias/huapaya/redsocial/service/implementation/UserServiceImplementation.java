@@ -32,8 +32,15 @@ public class UserServiceImplementation implements UserService {
     @Transactional(readOnly = false)
     @Override
     public UserEntity update(UserUpdateDto user, Long id) {
+        UserEntity userFind = this.findOne(id);
         UserEntity userUpdate = UserEntity.builder()
+                .id(id)
+                .username(userFind.getUsername())
                 .password(user.getPassword())
+                .email(userFind.getEmail())
+                .createdAt(userFind.getCreatedAt())
+                .updatedAt(userFind.getUpdatedAt())
+                .status(userFind.getStatus())
                 .build();
         return this.userRepository.save(userUpdate);
     }
