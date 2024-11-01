@@ -10,6 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import dev.arias.huapaya.redsocial.configuration.security.authorization.CustomAuthorizationManager;
 import dev.arias.huapaya.redsocial.configuration.security.filter.JwtAuthenticationFilter;
@@ -32,9 +33,12 @@ public class HttpSecurityConfig {
 
     private final CustomAuthorizationManager customAuthorizationManager;
 
+    private final CorsConfigurationSource corsConfigurationSource;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         SecurityFilterChain filter = http.csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(this.corsConfigurationSource))
                 .authenticationProvider(authenticationProvider)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
