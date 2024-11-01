@@ -5,7 +5,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import dev.arias.huapaya.redsocial.persistence.entity.RolEntity;
 import dev.arias.huapaya.redsocial.persistence.entity.UserEntity;
+import dev.arias.huapaya.redsocial.persistence.repository.RolRepository;
 import dev.arias.huapaya.redsocial.persistence.repository.UserRepository;
 import dev.arias.huapaya.redsocial.presentation.dto.users.UserCreateDto;
 import dev.arias.huapaya.redsocial.presentation.dto.users.UserPaginationDto;
@@ -19,12 +21,17 @@ public class UserServiceImplementation implements UserService {
 
     private final UserRepository userRepository;
 
+    private final RolRepository rolRepository;
+
     @Transactional(readOnly = false)
     @Override
     public UserEntity create(UserCreateDto user) {
-        UserEntity userCreate = UserEntity.builder().username(user.getUsername())
+        RolEntity rolDefault = this.rolRepository.findByDescription("USER");
+        UserEntity userCreate = UserEntity.builder()
+                .username(user.getUsername())
                 .password(user.getPassword())
                 .email(user.getEmail())
+                .rol(rolDefault)
                 .build();
         return this.userRepository.save(userCreate);
     }
@@ -38,6 +45,7 @@ public class UserServiceImplementation implements UserService {
                 .username(userFind.getUsername())
                 .password(user.getPassword())
                 .email(userFind.getEmail())
+                .rol(userFind.getRol())
                 .createdAt(userFind.getCreatedAt())
                 .updatedAt(userFind.getUpdatedAt())
                 .status(userFind.getStatus())
