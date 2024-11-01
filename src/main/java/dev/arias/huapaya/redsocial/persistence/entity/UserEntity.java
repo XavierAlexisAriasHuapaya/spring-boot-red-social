@@ -1,13 +1,21 @@
 package dev.arias.huapaya.redsocial.persistence.entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -22,7 +30,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class UserEntity implements Serializable {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +43,10 @@ public class UserEntity implements Serializable {
 
     @Column(unique = true)
     private String email;
+
+    @JoinColumn(name = "rolId")
+    @ManyToOne
+    private RolEntity rol;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -54,6 +66,42 @@ public class UserEntity implements Serializable {
     private void preUpdate() {
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.getRol() == null)
+            return null;
+        if (this.getRol().getPermissions() == null) {
+            return null;
+        }
+        List<GrantedAuthority> authorities = this.getRol().getPermissions()
+                .stream()
+                .map(rol -> rol.getOperation().getName())
+                .map(rol -> new SimpleGrantedAuthority(rol))
+                .collect(Collectors.toList());
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + rol.getDescription()));
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
 }

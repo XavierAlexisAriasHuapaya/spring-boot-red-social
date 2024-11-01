@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,6 +31,7 @@ public class UserController {
 
     private final UserService userService;
 
+    @PreAuthorize("hasAuthority('USER_CREATE')")
     @PostMapping
     public ResponseEntity<?> create(@RequestBody UserCreateDto user) {
         Map<String, Object> response = new HashMap<>();
@@ -39,6 +41,7 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAuthority('USER_UPDATE')")
     @PutMapping(path = "{id}")
     public ResponseEntity<?> update(@RequestBody UserUpdateDto user, @PathVariable Long id) {
         Map<String, Object> response = new HashMap<>();
@@ -48,12 +51,14 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAuthority('USER_FIND_ONE')")
     @GetMapping(path = "{id}")
     public ResponseEntity<?> findOne(@PathVariable Long id) {
         UserEntity user = this.userService.findOne(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('USER_PAGINATION')")
     @GetMapping
     public ResponseEntity<?> pagination(Pageable pageable) {
         Page<UserPaginationDto> userPagination = this.userService.pagination(pageable);
