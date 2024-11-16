@@ -2,6 +2,7 @@ package dev.arias.huapaya.redsocial.service.implementation;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,13 +24,15 @@ public class UserServiceImplementation implements UserService {
 
     private final RolRepository rolRepository;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Transactional(readOnly = false)
     @Override
     public UserEntity create(UserCreateDto user) {
         RolEntity rolDefault = this.rolRepository.findByDescription("USER");
         UserEntity userCreate = UserEntity.builder()
                 .username(user.getUsername())
-                .password(user.getPassword())
+                .password(this.passwordEncoder.encode(user.getPassword()))
                 .email(user.getEmail())
                 .rol(rolDefault)
                 .build();
@@ -43,7 +46,7 @@ public class UserServiceImplementation implements UserService {
         UserEntity userUpdate = UserEntity.builder()
                 .id(id)
                 .username(userFind.getUsername())
-                .password(user.getPassword())
+                .password(this.passwordEncoder.encode(user.getPassword()))
                 .email(userFind.getEmail())
                 .rol(userFind.getRol())
                 .createdAt(userFind.getCreatedAt())

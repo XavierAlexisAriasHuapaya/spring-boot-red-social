@@ -8,7 +8,7 @@ insert into modules (name, base_path, created_at, updated_at, status) values ('P
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('AUTHENTICATE', '/authenticate', 'POST', true, 1, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('VALIDATE', '/validate', 'POST', true, 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 
-insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('USER_CREATE', '', 'POST', false, 3, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('USER_CREATE', '', 'POST', true, 3, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('USER_UPDATE', '/[0-9]*', 'PUT', false, 3, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('USER_FIND_ONE', '/[0-9]*', 'GET', false, 3, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('USER_PAGINATION', '', 'GET', false, 3, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);

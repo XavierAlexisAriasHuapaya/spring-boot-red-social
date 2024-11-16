@@ -30,8 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
 
     private final UserService userService;
-
-    @PreAuthorize("hasAuthority('USER_CREATE')")
+    
     @PostMapping
     public ResponseEntity<?> create(@RequestBody UserCreateDto user) {
         Map<String, Object> response = new HashMap<>();
