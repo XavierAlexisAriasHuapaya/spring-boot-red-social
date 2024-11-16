@@ -49,6 +49,7 @@ public class JwtServiceImplementation implements JwtService {
     private Map<String, Object> extraClaims(UserEntity user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", user.getAuthorities());
+        claims.put("userId", user.getId());
         return claims;
     }
 
