@@ -16,6 +16,8 @@ public interface UserService {
 
     public UserEntity findOne(Long id);
 
+    public Page<UserPaginationDto> paginationExcludeId(Long id, Pageable pageable);
+
     public Page<UserPaginationDto> pagination(Pageable pageable);
 
 }

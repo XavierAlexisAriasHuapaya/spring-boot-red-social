@@ -15,7 +15,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtUtil {
 
-    private final int TOKEN_MINUTE = 5;
+    private final int TOKEN_MINUTE = 60;
 
     private final String SECRET_KEY = "Yn1902WoFt44P24FKqwGcrZj1jL4UmydziE";
 

@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
 
     private final UserService userService;
-    
+
     @PostMapping
     public ResponseEntity<?> create(@RequestBody UserCreateDto user) {
         Map<String, Object> response = new HashMap<>();
@@ -61,6 +61,13 @@ public class UserController {
     @GetMapping
     public ResponseEntity<?> pagination(Pageable pageable) {
         Page<UserPaginationDto> userPagination = this.userService.pagination(pageable);
+        return new ResponseEntity<>(userPagination, HttpStatus.OK);
+    }
+
+    @PreAuthorize("hasAuthority('USER_PAGINATION_EXCLUDE_ID')")
+    @GetMapping(path = "exclude/{id}")
+    public ResponseEntity<?> paginationExcluding(@PathVariable Long id, Pageable pageable) {
+        Page<UserPaginationDto> userPagination = this.userService.paginationExcludeId(id, pageable);
         return new ResponseEntity<>(userPagination, HttpStatus.OK);
     }
 

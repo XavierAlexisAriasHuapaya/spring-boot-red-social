@@ -81,4 +81,10 @@ public class UserServiceImplementation implements UserService {
         return paginationDto;
     }
 
+    @Override
+    public Page<UserPaginationDto> paginationExcludeId(Long id, Pageable pageable) {
+        Page<UserEntity> page = this.userRepository.findAllByIdNot(id, pageable);
+        return page.map(this::convertPagination);
+    }
+
 }
