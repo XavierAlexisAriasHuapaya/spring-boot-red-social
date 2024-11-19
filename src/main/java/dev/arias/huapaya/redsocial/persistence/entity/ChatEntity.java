@@ -11,6 +11,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -31,10 +32,19 @@ public class ChatEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, unique = true)
+    private String uniqueCode;
+
     private String name;
 
     @Enumerated(EnumType.STRING)
     private ChatTypeEnum chatType;
+
+    @JoinColumn(name = "senderId")
+    private UserEntity sender;
+
+    @JoinColumn(name = "receiverId")
+    private UserEntity receiver;
 
     @Column(updatable = false)
     private LocalDateTime createdAt;
@@ -45,6 +55,9 @@ public class ChatEntity implements Serializable {
 
     @PrePersist
     private void PrePersist() {
+        if (sender != null && receiver != null) {
+            this.uniqueCode = generateChatCode();
+        }
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
         this.status = true;
@@ -54,6 +67,12 @@ public class ChatEntity implements Serializable {
     private void preUpdate() {
         this.updatedAt = LocalDateTime.now();
         this.status = true;
+    }
+
+    private String generateChatCode() {
+        Long senderId = this.sender.getId();
+        Long receiverId = this.receiver.getId();
+        return senderId > receiverId ? (senderId + "-" + receiverId) : (receiverId + "-" + senderId);
     }
 
 }

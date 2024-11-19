@@ -47,6 +47,10 @@ public class HttpSecurityConfig {
                     exception.authenticationEntryPoint(this.authenticationEntryPoint);
                 })
                 .authorizeHttpRequests(httpRequest -> {
+                    httpRequest // Permitir la conexión inicial del WebSocket
+                            .requestMatchers("/chat-socket/**").permitAll();
+                    // Permitir prefijos de STOMP (aplicación y broker)
+                    httpRequest.requestMatchers("/app/**", "/topic/**").permitAll();
                     httpRequest.anyRequest().access(customAuthorizationManager);
                 })
                 .build();
