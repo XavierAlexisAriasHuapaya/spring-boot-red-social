@@ -33,9 +33,9 @@ public class MessageController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody MessageCreateDto message) {
         Map<String, Object> response = new HashMap<>();
-        MessageEntity messageCreate = this.messageService.create(message);
-        response.put("data", messageCreate);
-        response.put("message", "Successfully created");
+        // MessageEntity messageCreate = this.messageService.create(message);
+        // response.put("data", messageCreate);
+        // response.put("message", "Successfully created");
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

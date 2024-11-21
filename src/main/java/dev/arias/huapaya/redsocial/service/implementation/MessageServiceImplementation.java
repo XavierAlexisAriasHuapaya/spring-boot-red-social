@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dev.arias.huapaya.redsocial.persistence.entity.MessageEntity;
 import dev.arias.huapaya.redsocial.persistence.repository.MessageRepository;
+import dev.arias.huapaya.redsocial.presentation.dto.chat.MessageWebSocketDto;
 import dev.arias.huapaya.redsocial.presentation.dto.message.MessageAllDto;
-import dev.arias.huapaya.redsocial.presentation.dto.message.MessageCreateDto;
 import dev.arias.huapaya.redsocial.presentation.dto.message.MessageUpdateDto;
 import dev.arias.huapaya.redsocial.service.interfaces.MessageService;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class MessageServiceImplementation implements MessageService {
 
     @Transactional(readOnly = false)
     @Override
-    public MessageEntity create(MessageCreateDto message) {
+    public MessageEntity create(MessageWebSocketDto message) {
         MessageEntity messageCreate = MessageEntity.builder()
                 .chat(message.getChat())
                 .user(message.getUser())
@@ -72,6 +72,11 @@ public class MessageServiceImplementation implements MessageService {
     public List<MessageEntity> findByChatId(Long chatId) {
         List<MessageEntity> findByChatId = this.messageRepository.findByChatId(chatId);
         return findByChatId;
+    }
+
+    @Override
+    public List<MessageEntity> findByChatRoomCode(String roomCode) {
+        return this.messageRepository.findByChatRoomCode(roomCode);
     }
 
 }

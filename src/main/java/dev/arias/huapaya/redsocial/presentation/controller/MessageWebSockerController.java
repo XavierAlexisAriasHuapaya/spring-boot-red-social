@@ -6,17 +6,21 @@ import org.springframework.messaging.handler.annotation.SendTo;
 // import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
-import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatWebSocketDto;
+import dev.arias.huapaya.redsocial.presentation.dto.chat.MessageWebSocketDto;
+import dev.arias.huapaya.redsocial.service.interfaces.MessageService;
+import lombok.AllArgsConstructor;
 
+@AllArgsConstructor
 @Controller
 public class MessageWebSockerController {
 
-    // @PreAuthorize("hasAuthority('MESSAGE_WEB_SOCKET')")
-    @MessageMapping("/chat/{id}")
-    @SendTo("/topic/{id}")
-    public ChatWebSocketDto chat(@DestinationVariable Long id, ChatWebSocketDto chatDto) {
-        System.out.println(chatDto);
-        return new ChatWebSocketDto(chatDto.getId(), chatDto.getMessage());
+    private MessageService messageService;
+
+    @MessageMapping("/chat/{roomCode}")
+    @SendTo("/topic/{roomCode}")
+    public MessageWebSocketDto chat(@DestinationVariable String roomCode, MessageWebSocketDto chatDto) {
+        this.messageService.create(chatDto);
+        return new MessageWebSocketDto(chatDto.getChat(), chatDto.getUser(), chatDto.getContent());
     }
 
 }

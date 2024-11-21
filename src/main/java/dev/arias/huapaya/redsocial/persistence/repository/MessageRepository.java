@@ -12,4 +12,6 @@ public interface MessageRepository extends JpaRepository<MessageEntity, Long> {
 
     public List<MessageEntity> findByChatId(Long chatId);
 
+    public List<MessageEntity> findByChatRoomCode(String roomCode);
+
 }
