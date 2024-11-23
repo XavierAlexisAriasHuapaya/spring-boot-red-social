@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dev.arias.huapaya.redsocial.persistence.entity.ChatEntity;
 import dev.arias.huapaya.redsocial.persistence.repository.ChatRepository;
+import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatAllByUserDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatAllDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatCreateDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatOneDto;
@@ -91,6 +92,15 @@ public class ChatServiceImplementation implements ChatService {
             throw new ChatException("Record Empty");
         }
         return this.convertOne(chat.get());
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<ChatAllByUserDto> findByChatMembersUserId(Long userId) {
+        List<ChatEntity> listChat = this.chatRepository.findByChatMembersUserId(userId);
+        return listChat.stream()
+                .map(chat -> new ChatAllByUserDto(chat.getId(), chat.getName(), chat.getChatMembers()))
+                .collect(Collectors.toList());
     }
 
 }

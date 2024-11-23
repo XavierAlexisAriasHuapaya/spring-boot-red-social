@@ -6,7 +6,7 @@ import org.springframework.messaging.handler.annotation.SendTo;
 // import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
-import dev.arias.huapaya.redsocial.presentation.dto.chat.MessageWebSocketDto;
+import dev.arias.huapaya.redsocial.presentation.dto.message.MessageWebSocketDto;
 import dev.arias.huapaya.redsocial.service.interfaces.MessageService;
 import lombok.AllArgsConstructor;
 

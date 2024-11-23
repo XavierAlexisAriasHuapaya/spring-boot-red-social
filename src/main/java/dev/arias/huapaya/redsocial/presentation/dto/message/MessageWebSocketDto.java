@@ -1,4 +1,4 @@
-package dev.arias.huapaya.redsocial.presentation.dto.chat;
+package dev.arias.huapaya.redsocial.presentation.dto.message;
 
 import dev.arias.huapaya.redsocial.persistence.entity.ChatEntity;
 import dev.arias.huapaya.redsocial.persistence.entity.UserEntity;

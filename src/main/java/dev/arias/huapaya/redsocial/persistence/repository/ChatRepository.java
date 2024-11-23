@@ -1,5 +1,6 @@
 package dev.arias.huapaya.redsocial.persistence.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,5 +20,7 @@ public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
             "INNER JOIN chat_members cm2 ON cm2.chat_id = c.id AND cm2.user_id = :userTwo " +
             "AND c.chat_type = 'PRIVATE'; ")
     Optional<ChatEntity> getChatByUsers(@Param("userOne") Long userOne, @Param("userTwo") Long userTwo);
+
+    List<ChatEntity> findByChatMembersUserId(@Param("UserId") Long userId);
 
 }

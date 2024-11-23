@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import dev.arias.huapaya.redsocial.persistence.entity.MessageEntity;
 import dev.arias.huapaya.redsocial.persistence.repository.MessageRepository;
-import dev.arias.huapaya.redsocial.presentation.dto.chat.MessageWebSocketDto;
 import dev.arias.huapaya.redsocial.presentation.dto.message.MessageAllDto;
 import dev.arias.huapaya.redsocial.presentation.dto.message.MessageUpdateDto;
+import dev.arias.huapaya.redsocial.presentation.dto.message.MessageWebSocketDto;
 import dev.arias.huapaya.redsocial.service.interfaces.MessageService;
 import lombok.AllArgsConstructor;
 

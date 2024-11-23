@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.arias.huapaya.redsocial.persistence.entity.ChatEntity;
+import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatAllByUserDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatAllDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatCreateDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatOneDto;
@@ -64,6 +65,19 @@ public class ChatController {
         try {
             ChatOneDto chat = this.chatService.getChatByUsers(userIdOne, userIdTwo);
             return new ResponseEntity<>(chat, HttpStatus.OK);
+        } catch (ChatException e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
+
+    @PreAuthorize("hasAuthority('CHAT_ALL_BY_USERS')")
+    @GetMapping(path = "user/{userId}")
+    public ResponseEntity<?> findByChatMembersUserId(@PathVariable Long userId) {
+        try {
+            List<ChatAllByUserDto> chatAll = this.chatService.findByChatMembersUserId(userId);
+            return new ResponseEntity<>(chatAll, HttpStatus.OK);
         } catch (ChatException e) {
             Map<String, Object> response = new HashMap<>();
             response.put("message", e.getMessage());
