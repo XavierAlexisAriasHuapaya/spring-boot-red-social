@@ -19,6 +19,6 @@ public interface ChatService {
 
     public ChatOneDto getChatByUsers(Long userOne, Long userTwo);
 
-    List<ChatAllByUserDto> findByChatMembersUserId(Long userId);
+    List<ChatAllByUserDto> findChatsByUserId(Long userId);
 
 }

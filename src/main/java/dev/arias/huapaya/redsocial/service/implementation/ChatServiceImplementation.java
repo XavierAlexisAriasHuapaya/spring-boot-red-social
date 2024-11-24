@@ -15,6 +15,7 @@ import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatCreateDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatOneDto;
 import dev.arias.huapaya.redsocial.presentation.dto.chat.ChatUpdateDto;
 import dev.arias.huapaya.redsocial.presentation.exception.ChatException;
+import dev.arias.huapaya.redsocial.presentation.projection.chat.ChatAllByUserProjection;
 import dev.arias.huapaya.redsocial.service.interfaces.ChatService;
 import lombok.AllArgsConstructor;
 
@@ -96,11 +97,13 @@ public class ChatServiceImplementation implements ChatService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<ChatAllByUserDto> findByChatMembersUserId(Long userId) {
-        List<ChatEntity> listChat = this.chatRepository.findByChatMembersUserId(userId);
-        return listChat.stream()
-                .map(chat -> new ChatAllByUserDto(chat.getId(), chat.getName(), chat.getChatMembers()))
-                .collect(Collectors.toList());
+    public List<ChatAllByUserDto> findChatsByUserId(Long userId) {
+        List<ChatAllByUserProjection> projections = this.chatRepository.findChatsByUserId(userId);
+        List<ChatAllByUserDto> listDto = projections.stream()
+                .map(projection -> {
+                    return new ChatAllByUserDto(projection.getChat(), projection.getMessage());
+                }).collect(Collectors.toList());
+        return listDto;
     }
 
 }

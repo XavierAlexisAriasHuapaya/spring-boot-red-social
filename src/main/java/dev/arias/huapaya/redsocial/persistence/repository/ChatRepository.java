@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import dev.arias.huapaya.redsocial.persistence.entity.ChatEntity;
+import dev.arias.huapaya.redsocial.presentation.projection.chat.ChatAllByUserProjection;
 
 @Repository
 public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
@@ -21,6 +22,13 @@ public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
             "AND c.chat_type = 'PRIVATE'; ")
     Optional<ChatEntity> getChatByUsers(@Param("userOne") Long userOne, @Param("userTwo") Long userTwo);
 
-    List<ChatEntity> findByChatMembersUserId(@Param("UserId") Long userId);
+    @Query("SELECT c AS chat, " +
+            "m AS message " +
+            "FROM ChatEntity c " +
+            "JOIN c.chatMembers cm " +
+            "JOIN MessageEntity m ON m.chat.id = c.id " +
+            "WHERE cm.user.id = :userId " +
+            "AND m.createdAt = (SELECT MAX(m2.createdAt) FROM MessageEntity m2 WHERE m2.chat.id = c.id)")
+    List<ChatAllByUserProjection> findChatsByUserId(@Param("userId") Long userId);
 
 }
