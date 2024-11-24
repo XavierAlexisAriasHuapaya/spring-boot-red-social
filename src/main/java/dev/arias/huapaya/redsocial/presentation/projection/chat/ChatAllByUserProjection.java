@@ -9,4 +9,6 @@ public interface ChatAllByUserProjection {
 
     MessageEntity getMessage();
 
+    String getMessageTime();
+
 }

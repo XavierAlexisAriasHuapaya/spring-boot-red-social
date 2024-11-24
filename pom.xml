@@ -102,6 +102,12 @@
 			<artifactId>jackson-datatype-jsr310</artifactId>
 			<version>2.18.0</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.github.kevinsawicki</groupId>
+			<artifactId>timeago</artifactId>
+			<version>1.0.1</version>
+		</dependency>
 
 	</dependencies>
 

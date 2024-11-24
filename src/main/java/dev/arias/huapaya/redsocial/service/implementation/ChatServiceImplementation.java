@@ -1,11 +1,16 @@
 package dev.arias.huapaya.redsocial.service.implementation;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.github.kevinsawicki.timeago.TimeAgo;
 
 import dev.arias.huapaya.redsocial.persistence.entity.ChatEntity;
 import dev.arias.huapaya.redsocial.persistence.repository.ChatRepository;
@@ -101,7 +106,12 @@ public class ChatServiceImplementation implements ChatService {
         List<ChatAllByUserProjection> projections = this.chatRepository.findChatsByUserId(userId);
         List<ChatAllByUserDto> listDto = projections.stream()
                 .map(projection -> {
-                    return new ChatAllByUserDto(projection.getChat(), projection.getMessage());
+                LocalDateTime lastMessageTime = projection.getMessage().getCreatedAt();
+                Date messageDate = Date.from(lastMessageTime.atZone(ZoneId.systemDefault()).toInstant());
+                long messageTimestamp = messageDate.getTime();
+                TimeAgo timeAgo = new TimeAgo();
+                String timeAgoString = timeAgo.timeAgo(messageTimestamp);
+                    return new ChatAllByUserDto(projection.getChat(), projection.getMessage(), timeAgoString);
                 }).collect(Collectors.toList());
         return listDto;
     }

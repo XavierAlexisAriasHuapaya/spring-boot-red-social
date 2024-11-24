@@ -17,4 +17,6 @@ public class ChatAllByUserDto {
 
     private MessageEntity message;
 
+    private String messageTime;
+
 }
