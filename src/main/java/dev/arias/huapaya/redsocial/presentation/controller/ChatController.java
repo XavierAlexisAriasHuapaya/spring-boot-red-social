@@ -85,4 +85,17 @@ public class ChatController {
         }
     }
 
+    @PreAuthorize("hasAuthority('CHAT_ONE_BY_USER')")
+    @GetMapping(path = "{chatId}/user/{userId}")
+    public ResponseEntity<?> findChatOneByUserId(@PathVariable Long chatId, @PathVariable Long userId) {
+        try {
+            ChatAllByUserDto chat = this.chatService.findChatOneByUserId(chatId, userId);
+            return new ResponseEntity<>(chat, HttpStatus.OK);
+        } catch (ChatException e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
+
 }

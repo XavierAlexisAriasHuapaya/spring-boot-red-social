@@ -106,13 +106,26 @@ public class ChatServiceImplementation implements ChatService {
         List<ChatAllByUserProjection> projections = this.chatRepository.findChatsByUserId(userId);
         List<ChatAllByUserDto> listDto = projections.stream()
                 .map(projection -> {
-                LocalDateTime lastMessageTime = projection.getMessage().getCreatedAt();
-                Date messageDate = Date.from(lastMessageTime.atZone(ZoneId.systemDefault()).toInstant());
-                long messageTimestamp = messageDate.getTime();
-                TimeAgo timeAgo = new TimeAgo();
-                String timeAgoString = timeAgo.timeAgo(messageTimestamp);
+                    LocalDateTime lastMessageTime = projection.getMessage().getCreatedAt();
+                    Date messageDate = Date.from(lastMessageTime.atZone(ZoneId.systemDefault()).toInstant());
+                    long messageTimestamp = messageDate.getTime();
+                    TimeAgo timeAgo = new TimeAgo();
+                    String timeAgoString = timeAgo.timeAgo(messageTimestamp);
                     return new ChatAllByUserDto(projection.getChat(), projection.getMessage(), timeAgoString);
                 }).collect(Collectors.toList());
+        return listDto;
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public ChatAllByUserDto findChatOneByUserId(Long chatId, Long userId) {
+        ChatAllByUserProjection projection = this.chatRepository.findChatOneByUserId(chatId, userId);
+        LocalDateTime lastMessageTime = projection.getMessage().getCreatedAt();
+        Date messageDate = Date.from(lastMessageTime.atZone(ZoneId.systemDefault()).toInstant());
+        long messageTimestamp = messageDate.getTime();
+        TimeAgo timeAgo = new TimeAgo();
+        String timeAgoString = timeAgo.timeAgo(messageTimestamp);
+        ChatAllByUserDto listDto = new ChatAllByUserDto(projection.getChat(), projection.getMessage(), timeAgoString);
         return listDto;
     }
 
