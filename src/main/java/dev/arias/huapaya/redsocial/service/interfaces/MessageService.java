@@ -19,4 +19,6 @@ public interface MessageService {
 
     public List<MessageEntity> findByChatRoomCode(String roomCode);
 
+    public Boolean updateSeen(Long id);
+
 }

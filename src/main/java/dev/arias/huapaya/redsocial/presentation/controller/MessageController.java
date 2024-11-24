@@ -63,4 +63,13 @@ public class MessageController {
         return new ResponseEntity<>(findByChatId, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('MESSAGE_UPDATE_SEEN')")
+    @PutMapping(path = "seen/{id}")
+    public ResponseEntity<?> updateSeen(@PathVariable Long id) {
+        Map<String, Object> response = new HashMap<>();
+        Boolean flag = this.messageService.updateSeen(id);
+        response.put("message", flag ? "Successfully updated" : "Error updated");
+        return new ResponseEntity<>(response, flag ? HttpStatus.CREATED : HttpStatus.BAD_REQUEST);
+    }
+
 }

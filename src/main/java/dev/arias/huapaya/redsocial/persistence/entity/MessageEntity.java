@@ -40,6 +40,10 @@ public class MessageEntity implements Serializable {
 
     private String content;
 
+    private LocalDateTime timeSeen;
+
+    private Boolean seen;
+
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
@@ -51,6 +55,7 @@ public class MessageEntity implements Serializable {
     private void PrePersist() {
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
+        this.seen = false;
         this.status = true;
     }
 

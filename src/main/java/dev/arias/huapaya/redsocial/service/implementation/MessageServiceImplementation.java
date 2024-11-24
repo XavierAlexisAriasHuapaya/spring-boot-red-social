@@ -1,6 +1,8 @@
 package dev.arias.huapaya.redsocial.service.implementation;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -77,6 +79,20 @@ public class MessageServiceImplementation implements MessageService {
     @Override
     public List<MessageEntity> findByChatRoomCode(String roomCode) {
         return this.messageRepository.findByChatRoomCode(roomCode);
+    }
+
+    @Override
+    public Boolean updateSeen(Long id) {
+        Optional<MessageEntity> messageFind = this.messageRepository.findById(id);
+        if (messageFind.isPresent()) {
+            if (messageFind.get().getSeen()) {
+                return false;
+            }
+            messageFind.get().setSeen(true);
+            messageFind.get().setTimeSeen(LocalDateTime.now());
+            return this.messageRepository.save(messageFind.get()).getSeen();
+        }
+        return false;
     }
 
 }
