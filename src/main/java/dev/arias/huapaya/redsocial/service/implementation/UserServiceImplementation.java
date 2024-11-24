@@ -34,6 +34,8 @@ public class UserServiceImplementation implements UserService {
                 .username(user.getUsername())
                 .password(this.passwordEncoder.encode(user.getPassword()))
                 .email(user.getEmail())
+                .name(user.getName())
+                .lastName(user.getLastName())
                 .rol(rolDefault)
                 .build();
         return this.userRepository.save(userCreate);
@@ -48,6 +50,8 @@ public class UserServiceImplementation implements UserService {
                 .username(userFind.getUsername())
                 .password(this.passwordEncoder.encode(user.getPassword()))
                 .email(userFind.getEmail())
+                .name(userFind.getName())
+                .lastName(userFind.getLastName())
                 .rol(userFind.getRol())
                 .createdAt(userFind.getCreatedAt())
                 .updatedAt(userFind.getUpdatedAt())
@@ -74,6 +78,8 @@ public class UserServiceImplementation implements UserService {
                 .id(user.getId())
                 .username(user.getUsername())
                 .email(user.getEmail())
+                .name(user.getName())
+                .lastName(user.getLastName())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
                 .status(user.getStatus())

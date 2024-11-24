@@ -19,6 +19,10 @@ public class UserPaginationDto {
 
     private String email;
 
+    private String name;
+
+    private String lastName;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;

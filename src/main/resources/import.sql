@@ -52,28 +52,9 @@ INSERT INTO permissions (rol_id, operation_id) VALUES (2, 17);
 INSERT INTO permissions (rol_id, operation_id) VALUES (2, 18);
 INSERT INTO permissions (rol_id, operation_id) VALUES (2, 19);
 
-insert into users (username, password, email, rol_id, created_at, updated_at, status) values ('alexis', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'xavieralexisariashuapaya@hotmail.com', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
-insert into users (username, password, email, rol_id, created_at, updated_at, status) values ('manuel', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'xavieralexisariashuapaya1999@gmail.com', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
-insert into users (username, password, email, rol_id, created_at, updated_at, status) values ('maria', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'ariashuapayaxavieralexis@gmail.com', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
-
--- insert into chats (name, chat_type, created_at, updated_at, room_code, status) values ('Alexis and Manuel', 'PRIVATE', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', '1001', true);
--- insert into chat_members (chat_id, user_id, joined_at, created_at, updated_at, status ) values (1, 1, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into chat_members (chat_id, user_id, joined_at, created_at, updated_at, status ) values (1, 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
-
--- insert into chats (name, chat_type, created_at, updated_at, room_code, status) values ('Alexis and Manuel and Maria', 'GROUP', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', '1002', true);
--- insert into chat_members (chat_id, user_id, joined_at, created_at, updated_at, status ) values (2, 3, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into chat_members (chat_id, user_id, joined_at, created_at, updated_at, status ) values (2, 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into chat_members (chat_id, user_id, joined_at, created_at, updated_at, status ) values (2, 1, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
-
-
--- insert into messages (chat_id, user_id, content, created_at, updated_at, status) values (1, 1, 'Hola?', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into messages (chat_id, user_id, content, created_at, updated_at, status) values (1, 2, '¿Hola?', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into messages (chat_id, user_id, content, created_at, updated_at, status) values (1, 1, 'Que tal?', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
-
-
--- insert into messages (chat_id, user_id, content, created_at, updated_at, status) values (2, 1, 'Hola a todos.', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into messages (chat_id, user_id, content, created_at, updated_at, status) values (2, 2, 'Hola Alexis', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into messages (chat_id, user_id, content, created_at, updated_at, status) values (2, 3, 'Hola a todo el grupo', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
--- insert into messages (chat_id, user_id, content, created_at, updated_at, status) values (2, 1, 'A que hora nos reunimos para avanzar el trabajo', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
-
--- insert into publications (user_id, content, created_at, updated_at, status) values (1, '¡Hoy me encuentro muy feliz!', '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('alexis', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'xavieralexisariashuapaya@hotmail.com', 'Xavier Alexis', 'Arias Huapaya', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('michael', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'xavieralexisariashuapaya1999@gmail.com', 'Michael Felix', 'Acosta Perez', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('kassandra', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'ariashuapayaxavieralexis@gmail.com', 'Kassandra Isabella', 'Acuña Perez' ,2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('roxana', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'roxana@gmail.com', 'Roxana', 'Aguirre Valencia', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('emylia', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'emylia@gmail.com', 'Emylia Bertha', 'Benaventa Ramos', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('jair', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'jair@gmail.com', 'Jair Jesus Alberto', 'Barbaran Rimachi', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
