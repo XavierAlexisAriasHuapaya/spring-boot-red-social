@@ -2,12 +2,12 @@ spring:
   application:
     name: app-red-social
   datasource:
-    url: jdbc:postgresql://localhost:5432/redsocial
-    username: postgres
-    password: 123
+    url: jdbc:postgresql://147.93.137.251:5432/db-chat
+    username: usr-chat
+    password: qk07Pv2x6Zy077xUzAT5
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: none
 
 server:
   servlet:
