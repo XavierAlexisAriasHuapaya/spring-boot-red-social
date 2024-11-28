@@ -20,6 +20,7 @@ insert into operations (name, path, http_method, permit_all, module_id, created_
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('CHAT_BY_USERS', '/users/one/[0-9]*/two/[0-9]*', 'GET', false, 4, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('CHAT_ALL_BY_USERS', '/user/[0-9]*', 'GET', false, 4, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('CHAT_ONE_BY_USER', '/[0-9]*/user/[0-9]*', 'GET', false, 4, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
+insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('CHAT_NOTIFICATION_BY_USER', '/notifications/user/[0-9]*', 'GET', false, 4, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('MESSAGE_CREATE', '', 'POST', false, 5, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into operations (name, path, http_method, permit_all, module_id, created_at, updated_at, status) values ('MESSAGE_UPDATE', '/[0-9]*', 'PUT', false, 5, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
@@ -54,6 +55,7 @@ INSERT INTO permissions (rol_id, operation_id) VALUES (2, 18);
 INSERT INTO permissions (rol_id, operation_id) VALUES (2, 19);
 INSERT INTO permissions (rol_id, operation_id) VALUES (2, 20);
 INSERT INTO permissions (rol_id, operation_id) VALUES (2, 21);
+INSERT INTO permissions (rol_id, operation_id) VALUES (2, 22);
 
 insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('alexis', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'xavieralexisariashuapaya@hotmail.com', 'Xavier Alexis', 'Arias Huapaya', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);
 insert into users (username, password, email, name, last_name, rol_id, created_at, updated_at, status) values ('michael', '$2a$10$7.kqP/Rb5aFoYnaPXt7jXOzJMrvXiLfYP1d5YSjqEIkpELpjjYl8C', 'xavieralexisariashuapaya1999@gmail.com', 'Michael Felix', 'Acosta Perez', 2, '2024-10-31T14:30:28.380152', '2024-10-31T14:30:28.380152', true);

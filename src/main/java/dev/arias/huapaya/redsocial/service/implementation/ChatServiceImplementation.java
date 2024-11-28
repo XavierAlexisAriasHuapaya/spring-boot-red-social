@@ -129,4 +129,9 @@ public class ChatServiceImplementation implements ChatService {
         return listDto;
     }
 
+    @Override
+    public List<ChatEntity> findChatNotificationsByUser(Long userId) {
+        return this.chatRepository.findChatNotificationsByUser(userId);
+    }
+
 }

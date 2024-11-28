@@ -41,4 +41,14 @@ public interface ChatRepository extends JpaRepository<ChatEntity, Long> {
                         "AND m.createdAt = (SELECT MAX(m2.createdAt) FROM MessageEntity m2 WHERE m2.chat.id = c.id)")
         ChatAllByUserProjection findChatOneByUserId(@Param("chatId") Long chatId, @Param("userId") Long userId);
 
+        @Query("SELECT c AS chat " +
+                        "FROM ChatEntity c " +
+                        "JOIN c.chatMembers cm " +
+                        "JOIN MessageEntity m ON m.chat.id = c.id " +
+                        "WHERE cm.user.id = :userId " +
+                        "AND m.user.id != :userId " +
+                        "AND m.createdAt = (SELECT MAX(m2.createdAt) FROM MessageEntity m2 WHERE m2.chat.id = c.id) " +
+                        "AND m.seen = false")
+        List<ChatEntity> findChatNotificationsByUser(@Param("userId") Long userId);
+
 }

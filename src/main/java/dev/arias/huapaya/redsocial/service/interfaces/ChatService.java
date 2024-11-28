@@ -23,4 +23,6 @@ public interface ChatService {
 
     ChatAllByUserDto findChatOneByUserId(Long chatId, Long userId);
 
+    List<ChatEntity> findChatNotificationsByUser(Long userId);
+
 }

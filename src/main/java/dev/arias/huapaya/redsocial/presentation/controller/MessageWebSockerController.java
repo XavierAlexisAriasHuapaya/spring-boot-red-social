@@ -3,7 +3,6 @@ package dev.arias.huapaya.redsocial.presentation.controller;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-// import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import dev.arias.huapaya.redsocial.presentation.dto.message.MessageWebSocketDto;

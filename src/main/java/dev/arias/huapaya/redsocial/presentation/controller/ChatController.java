@@ -98,4 +98,17 @@ public class ChatController {
         }
     }
 
+    @PreAuthorize("hasAuthority('CHAT_NOTIFICATION_BY_USER')")
+    @GetMapping(path = "notifications/user/{userId}")
+    public ResponseEntity<?> findChatNotificationsByUser(@PathVariable Long userId) {
+        try {
+            List<ChatEntity> chatAll = this.chatService.findChatNotificationsByUser(userId);
+            return new ResponseEntity<>(chatAll, HttpStatus.OK);
+        } catch (ChatException e) {
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", e.getMessage());
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    }
+
 }
