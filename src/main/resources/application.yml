@@ -2,7 +2,7 @@ spring:
   application:
     name: app-red-social
   datasource:
-    url: jdbc:postgresql://147.93.137.251:5432/db-chat
+    url: jdbc:postgresql://localhost/db-chat
     username: usr-chat
     password: qk07Pv2x6Zy077xUzAT5
   jpa:
